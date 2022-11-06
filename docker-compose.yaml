@@ -1,37 +1,24 @@
-version: '3'
+version: "3.7"
 services:
-  web:
-    platform: linux/x86_64
-    container_name: ${WEB_HOST}
-    image: ${WEB_IMAGE_NAME}:${WEB_IMAGE_TAG}
-    build: ./
-    depends_on:
-      - db
-    ports:
-      - "${WEB_PORT}:8069"
-    volumes:
-      - odoo-web-data:/var/lib/odoo
-      - ./config:/etc/odoo
-      - ./addons:/mnt/extra-addons
-      - ./addons-customize:/mnt/extra-addons-customize
-    environment:
-      - VIRTUAL_HOST=10.marlonfalcon.com
-    entrypoint: "/usr/bin/odoo -c /etc/odoo/odoo.conf"
-    restart: always
-  db:
-    platform: linux/x86_64
-    container_name: ${DB_HOST}
-    image: ${DB_IMAGE}:${DB_TAG}
-    environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_PASSWORD=${DB_PASSWD}
-      - POSTGRES_USER=${DB_USER}
-      - PGDATA=/var/lib/postgresql/data/pgdata
-    ports:
-      - "${DB_PORT}:5432"
-    volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
-    restart: always
-volumes:
-  odoo-db-data:
-  odoo-web-data:
+    odoo10:
+        image: odoo:10.0
+        platform: linux/amd64
+        container_name: odoo10
+        depends_on:
+            - postgresql
+        tty: true
+        stdin_open: true
+        ports:
+            - "8069:8069"
+        volumes:
+            - ./addons:/mnt/extra-addons
+            - ./conf:/etc/odoo
+        environment:
+            - HOST=postgres10
+    postgresql10:
+        image: postgres:10.0
+        container_name: postgres10
+        environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_PASSWORD=odoo
+            - POSTGRES_USER=odoo
