@@ -9,7 +9,7 @@ services:
         tty: true
         stdin_open: true
         ports:
-            - "8069:8069"
+            - "8010:8069"
         volumes:
             - ./addons:/mnt/extra-addons
             - ./conf:/etc/odoo
