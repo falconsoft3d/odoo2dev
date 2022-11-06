@@ -1,7 +1,7 @@
 version: "3.7"
 services:
     odoo10:
-        image: odoo:10.0
+        image: mfalconsoft/odoo:10.0
         platform: linux/amd64
         container_name: odoo10
         depends_on:
