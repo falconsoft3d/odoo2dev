@@ -15,6 +15,7 @@ services:
             - ./conf:/etc/odoo
         environment:
             - HOST=postgres10
+        restart: always
     postgresql10:
         image: postgres:10.0
         container_name: postgres10
