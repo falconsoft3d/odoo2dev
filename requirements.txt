@@ -1,0 +1,5 @@
+simplejson
+libxml2
+python-openpyxl
+python-libxml2
+ghostscript
