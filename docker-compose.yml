@@ -14,11 +14,11 @@ services:
             - ./addons:/mnt/extra-addons
             - ./conf:/etc/odoo
         environment:
-            - HOST=postgres13
+            - HOST=postgres
         restart: always
     postgresql:
         image: postgres:13.0
-        container_name: postgres13
+        container_name: postgres
         environment:
             - POSTGRES_DB=postgres
             - POSTGRES_PASSWORD=odoo
